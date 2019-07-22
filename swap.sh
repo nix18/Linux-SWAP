@@ -6,6 +6,7 @@ echo
 function main(){
 totalswap=`free -m| grep "Swap:"| awk '{print $2}'`
 echo "当前SWAP：$totalswap MB"
+echo
 echo "1、设置SWAP大小"
 echo "2、SWAP参数优化"
 echo "3、退出"
