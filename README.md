@@ -1,5 +1,5 @@
 # Linux-SWAP
-Linux一键添加SWAP，优化SWAP参数
+Linux一键设置SWAP大小，优化SWAP参数
 
 使用方法：
 
