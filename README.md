@@ -8,3 +8,7 @@ Linux一键添加SWAP
       chmod +x swap.sh
       
       ./swap.sh
+      
+作者博客：https://moecola.com
+
+参考：https://blog.csdn.net/u010429286/article/details/79219230
