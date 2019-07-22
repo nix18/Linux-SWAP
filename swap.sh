@@ -6,7 +6,7 @@ echo
 function main(){
 totalswap=`free -m| grep "Swap:"| awk '{print $2}'`
 echo "当前SWAP：$totalswap MB"
-echo "1、添加SWAP"
+echo "1、设置SWAP大小"
 echo "2、SWAP参数优化"
 echo "3、退出"
 echo -n "请输入："
@@ -24,9 +24,9 @@ main;;
 esac
 }
 function add(){
-echo "请输入添加Swap大小(例如1G)"
+echo "请输入设置Swap大小(单位Mb)"
 read -e swap
-file="1"
+file="swapfile"
 de $file
 main
 }
@@ -35,10 +35,12 @@ cd /
 file=$1
 if [ -f "$file" ]
 then
-	file1=`echo "$1+1"|bc`
-        de $file1
+	sed -i '/swapfile/d' /etc/fstab
+	echo "3" > /proc/sys/vm/drop_caches
+	swapoff -a
+	rm -f /swapfile
 else
-	sudo fallocate -l $swap $1
+	sudo fallocate -l ${swap}M $1
 	sudo chmod 600 $1
 	sudo mkswap $1
 	sudo swapon $1
@@ -88,5 +90,12 @@ function check(){
 	fi;;
 	esac
 }
+checkovz(){
+    if [[ -d "/proc/vz" ]]; then
+        echo "OVZ虚拟化不支持设置SWAP"
+        exit 1
+    fi
+}
 check
+checkovz
 main
