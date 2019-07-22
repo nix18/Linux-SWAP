@@ -1,6 +1,6 @@
 #!/bin/bash
 echo
-echo "*Swap一键添加脚本"
+echo "*Swap一键添加脚本V1.1"
 echo "*  By Moecola.com"
 echo
 function main(){
