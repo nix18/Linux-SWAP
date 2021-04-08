@@ -40,14 +40,14 @@ then
 	echo "3" > /proc/sys/vm/drop_caches
 	swapoff -a
 	rm -f /swapfile
-	sudo fallocate -l ${swap}M $1
+	sudo dd if=/dev/zero of=$1 count=${swap} bs=1MiB
 	sudo chmod 600 $1
 	sudo mkswap $1
 	sudo swapon $1
 	sudo cp /etc/fstab /etc/fstab.bak
 	echo -e "/$1 none swap sw 0 0" | sudo tee -a /etc/fstab
 else
-	sudo fallocate -l ${swap}M $1
+	sudo dd if=/dev/zero of=$1 count=${swap} bs=1MiB
 	sudo chmod 600 $1
 	sudo mkswap $1
 	sudo swapon $1
